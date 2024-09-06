@@ -1,6 +1,7 @@
 import { useDeleteTodo, useUpdateTodo } from '@/hooks/useMutateTodos'
 import { TodoType } from '@/models/todo'
 import { useState } from 'react'
+import Button from './Button'
 
 interface TodoProps {
   todo: TodoType
@@ -50,36 +51,39 @@ export default function Todos({ todo }: TodoProps) {
         </p>
       )}
       {isEditing ? (
-        <button
-          className="text-green-600 hover:text-green-800 transition duration-200"
+        <Button
+          width={8}
+          height={8}
+          label=""
+          className="text-green-600 hover:text-green-800 transition duration-200 mr-2"
+          icon={<i className="fas fa-check"></i>}
           onClick={async () => {
             await updateTodoMutation.mutateAsync()
             setIsEditing(false)
           }}
-          aria-label="Save"
-        >
-          <i className="fas fa-check"></i>
-        </button>
+        />
       ) : (
-        <button
-          className="text-blue-600 hover:text-blue-800 transition duration-200"
+        <Button
+          width={8}
+          height={8}
+          label=""
+          className="text-blue-600 hover:text-blue-800 transition duration-200 mr-2"
           onClick={() => {
             setIsEditing(true)
           }}
-          aria-label="Edit"
-        >
-          <i className="fas fa-pencil-alt"></i>
-        </button>
+          icon={<i className="fas fa-pencil-alt"></i>}
+        />
       )}
-      <button
+      <Button
+        width={8}
+        height={8}
+        label=""
+        icon={<i className="fas fa-trash"></i>}
         className="text-red-600 hover:text-red-800 transition duration-200"
-        aria-label="Delete"
         onClick={async () => {
           await deleteTodoMutation.mutateAsync()
         }}
-      >
-        <i className="fas fa-trash"></i>
-      </button>
+      />
     </div>
   )
 }
