@@ -23,10 +23,8 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body>
-        <ReactQueryClientProvider>
-          {children}
-        </ReactQueryClientProvider>
+      <body className="custom-scrollbar">
+        <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
       </body>
     </html>
   )

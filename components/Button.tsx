@@ -21,14 +21,15 @@ const Button: React.FC<ButtonProps> = ({
       style={{
         width: `${width}px`,
         height: `${height}px`,
+        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        display: 'flex',
       }}
+      className="bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1"
       {...rest}
     >
-      <p className="text-white font-semibold leading-3">{label}</p>
-      {icon}
+      {icon && <span className="">{icon}</span>}
+      <span className="text-base tracking-wide">{label}</span>
     </button>
   )
 }

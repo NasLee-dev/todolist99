@@ -2,8 +2,8 @@ import UI from './ui'
 
 export default function Home() {
   return (
-    <div>
+    <main>
       <UI />
-    </div>
+    </main>
   )
 }
