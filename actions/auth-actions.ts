@@ -45,11 +45,11 @@ export async function createUser({
     password,
     name,
     phoneNo,
-    created_at: new Date().toISOString(),
-  })
+  } as any)
+
   if (!data) {
     handleError(error as any)
     return null
   }
-  return data
+  return data ? data[0] : null
 }
