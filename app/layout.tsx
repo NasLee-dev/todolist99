@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import ReactQueryClientProvider from '@/config/ReactQueryClientProvider'
+import Header from '@/components/Header'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,7 +24,8 @@ export default function RootLayout({
           referrerPolicy="no-referrer"
         />
       </head>
-      <body className="custom-scrollbar">
+      <body className={`custom-scrollbar `}>
+        <Header />
         <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
       </body>
     </html>

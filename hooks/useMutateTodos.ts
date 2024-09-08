@@ -1,43 +1,32 @@
 import { createTodo, deleteTodo, updateTodo } from '@/actions/todo-actions'
 import { queryClient } from '@/config/ReactQueryClientProvider'
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  useMutation,
-} from '@tanstack/react-query'
+import { userAtom } from '@/store/userAtom'
+import { useMutation } from '@tanstack/react-query'
+import { useAtom } from 'jotai'
 import { Dispatch, SetStateAction } from 'react'
 
 export function useCreateTodo({
   searchInput = '',
-  refetch,
   setSearchInput,
 }: {
   searchInput: string
-  refetch: (options?: RefetchOptions | undefined) => Promise<
-    QueryObserverResult<
-      {
-        completed: boolean | null
-        created_at: string
-        id: number
-        title: string | null
-        updated_at: string | null
-      }[],
-      Error
-    >
-  >
   setSearchInput: Dispatch<SetStateAction<string>>
 }) {
+  const [user, setUser] = useAtom(userAtom)
   return useMutation({
     mutationKey: ['createTodo'],
     mutationFn: () =>
       createTodo({
         title: searchInput,
         completed: false,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+        userId: user.userId,
       }),
     onSuccess: () => {
-      setTimeout(() => {
-        refetch()
-      }, 500)
+      queryClient.invalidateQueries({
+        queryKey: ['Alltodos'],
+      })
       setSearchInput('')
     },
   })

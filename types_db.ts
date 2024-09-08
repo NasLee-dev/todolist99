@@ -68,25 +68,58 @@ export type Database = {
       }
       todo: {
         Row: {
-          completed: boolean | null
+          completed: boolean
           created_at: string
           id: number
-          title: string | null
-          updated_at: string | null
+          title: string
+          updated_at: string
+          userId: string
         }
         Insert: {
-          completed?: boolean | null
+          completed: boolean
           created_at?: string
           id?: number
-          title?: string | null
-          updated_at?: string | null
+          title: string
+          updated_at: string
+          userId: string
         }
         Update: {
-          completed?: boolean | null
+          completed?: boolean
           created_at?: string
           id?: number
-          title?: string | null
-          updated_at?: string | null
+          title?: string
+          updated_at?: string
+          userId?: string
+        }
+        Relationships: []
+      }
+      user: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          password: string
+          phoneNo: string
+          updated_at: string
+          userId: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name: string
+          password: string
+          phoneNo: string
+          updated_at?: string
+          userId: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+          password?: string
+          phoneNo?: string
+          updated_at?: string
+          userId?: string
         }
         Relationships: []
       }

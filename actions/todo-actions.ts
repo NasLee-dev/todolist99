@@ -11,11 +11,35 @@ function handleError(e: Error) {
   console.error(e)
 }
 
-export async function getTodos({ searchInput = '' }): Promise<TodoRow[]> {
+export async function getAllTodos({
+  userId,
+}: {
+  userId: string
+}): Promise<TodoRow[]> {
   const supabase = await createServerSupabaseClient()
   const { data, error } = await supabase
     .from('todo')
     .select('*')
+    .eq('userId', userId)
+  if (!data) {
+    handleError(error as any)
+    return []
+  }
+  return data
+}
+
+export async function getTodos({
+  searchInput,
+  userId,
+}: {
+  searchInput: string
+  userId: string
+}): Promise<TodoRow[]> {
+  const supabase = await createServerSupabaseClient()
+  const { data, error } = await supabase
+    .from('todo')
+    .select('*')
+    .eq('userId', userId)
     .ilike('title', `%${searchInput}%`)
     .order('created_at', { ascending: true })
   if (!data) {
