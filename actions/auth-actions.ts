@@ -18,19 +18,25 @@ function handleError(e: Error) {
   console.error(e)
 }
 
-export async function getUser({ email, password }: User): Promise<UserRow[]> {
+export async function getUser({
+  email,
+  password,
+}: User): Promise<UserRow | number> {
   const supabase = await createServerSupabaseClient()
   const { data, error } = await supabase
     .from('user')
     .select('*')
     .eq('userId', email)
     .eq('password', password)
-
-  if (!data) {
-    handleError(error as any)
-    return []
+    .single()
+  if (error) {
+    console.log(error)
+    if (error.code === 'PGRST116') {
+      console.error('User not found or password mismatch')
+      return 201
+    }
   }
-  return data
+  return data as UserRow
 }
 
 export async function createUser({

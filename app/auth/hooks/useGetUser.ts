@@ -1,6 +1,6 @@
 'use client'
 
-import { getUser } from '@/actions/auth-actions'
+import { getUser, UserRow } from '@/actions/auth-actions'
 import useSessionStorage from '@/hooks/useSessionStorage'
 import { userAtom } from '@/store/userAtom'
 import { useMutation } from '@tanstack/react-query'
@@ -21,14 +21,19 @@ export default function UseGetUser({ email, password }: User) {
     mutationKey: ['getUser'],
     mutationFn: () => getUser({ email, password }),
     onSuccess: (data) => {
-      setUser({
-        userId: data[0].userId,
-        name: data[0].name,
-      })
-      setSessionStorage({
-        userId: data[0].userId,
-        name: data[0].name,
-      })
+      if (data === 201) {
+        alert('아이디가 없거나 비밀번호가 틀렸습니다')
+        return
+      } else if (typeof data === 'object') {
+        setUser({
+          userId: data.userId,
+          name: data.name,
+        })
+        setSessionStorage({
+          userId: data.userId,
+          name: data.name,
+        })
+      }
     },
   })
 }
