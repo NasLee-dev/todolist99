@@ -1,3 +1,4 @@
+'use client'
 import Button from '@/components/Button'
 import SkeletonComponent from '@/components/SkeletonUI'
 import Todos from '@/components/Todos'
