@@ -9,6 +9,7 @@ const useSessionStorage = <T>({
   key,
   initialValue,
 }: UseSessionStorageOptions<T>): [T, (value: T) => void, () => void] => {
+  if (typeof window === 'undefined') return [initialValue, () => {}, () => {}]
   const [state, setState] = useState<T>(() => {
     if (typeof window === 'undefined') return initialValue
     try {

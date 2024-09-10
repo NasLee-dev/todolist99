@@ -1,9 +1,8 @@
 'use client'
-import Auth from '@/app/auth'
+import Auth from '@/app/todo/login'
 import useSessionStorage from '@/hooks/useSessionStorage'
 import { userAtom } from '@/store/userAtom'
 import { useAtom } from 'jotai'
-import Link from 'next/link'
 
 interface AuthGuardProps {
   children: React.ReactNode
