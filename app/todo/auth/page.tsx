@@ -1,8 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
-import SignIn from './signin/page'
-import SignUp from './signup/page'
 import MyTodos from '../page'
+import SignUp from '@/components/auth/signup'
+import SignIn from '@/components/auth/signin'
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false)

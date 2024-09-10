@@ -4,14 +4,13 @@ import Divider from '@/components/Divider'
 import Spacing from '@/components/Spacing'
 import TextField from '@/components/TextField'
 import UseGetUser from '../hooks/useGetUser'
-import { Dispatch, useState } from 'react'
-import { SetStateAction } from 'jotai'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 
-interface SignInProps {
-  setIsSignUp: Dispatch<SetStateAction<boolean>>
+interface Props {
+  setIsSignUp?: Dispatch<SetStateAction<boolean>>
 }
 
-export default function SignIn({ setIsSignUp }: SignInProps) {
+const SignIn: React.FC<Props> = ({ setIsSignUp }) => {
   const [auth, setAuth] = useState({
     email: '',
     password: '',
@@ -53,7 +52,7 @@ export default function SignIn({ setIsSignUp }: SignInProps) {
             width={360}
             height={50}
             onClick={() => {
-              setIsSignUp(true)
+              setIsSignUp && setIsSignUp(true)
             }}
           />
         </div>
@@ -61,3 +60,5 @@ export default function SignIn({ setIsSignUp }: SignInProps) {
     </div>
   )
 }
+
+export default SignIn
