@@ -1,11 +1,11 @@
 'use client'
+import useMutateUser from '@/app/todo/auth/hooks/useMutateUser'
 import Button from '@/components/Button'
 import Divider from '@/components/Divider'
 import Spacing from '@/components/Spacing'
 import TextField from '@/components/TextField'
 import { SetStateAction } from 'jotai'
 import { ChangeEvent, Dispatch, useCallback, useState } from 'react'
-import useMutateUser from '../hooks/useMutateUser'
 
 interface SignUpProps {
   setIsSignUp: Dispatch<SetStateAction<boolean>>
