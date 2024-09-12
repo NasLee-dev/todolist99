@@ -10,6 +10,7 @@ const TextField = ({ label, errorMsg, ...props }: TextFieldProps) => {
       <input
         {...props}
         className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:border-blue-500 transition duration-200 mt-2"
+        placeholder="Type here"
       />
       {errorMsg && <span className="text-red-500 text-sm">{errorMsg}</span>}
     </div>
