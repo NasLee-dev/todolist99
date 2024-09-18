@@ -9,5 +9,4 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
 }
 
-// createJestConfig는 next/jest가 비동기식인 Next.js 구성을 로드할 수 있도록 이러한 방식으로 내보내짐
 module.exports = createJestConfig(customJestConfig)

@@ -8,8 +8,8 @@ interface UseSessionStorageOptions<T> {
 const useSessionStorage = <T>({
   key,
   initialValue,
-}: UseSessionStorageOptions<T>): [T, (value: T) => void, () => void] => {
-  if (typeof window === 'undefined') return [initialValue, () => {}, () => {}]
+}: UseSessionStorageOptions<T>): [T, (value: T) => void, () => void, (key: string) => string] => {
+  if (typeof window === 'undefined') return [initialValue, () => {}, () => {}, () => '']
 
   const [state, setState] = useState<T>(() => {
     if (typeof window === 'undefined') return initialValue
@@ -34,6 +34,18 @@ const useSessionStorage = <T>({
     }
   }, [key, state])
 
+  const getSessionStorage = (key: string) => {
+    try {
+      const sessionStorageValue = window.sessionStorage.getItem(key)
+      return sessionStorageValue
+        ? JSON.parse(sessionStorageValue)
+        : initialValue
+    } catch (error) {
+      console.error(error)
+      return initialValue
+    }
+  }
+
   const setSessionStorage = (value: T) => {
     try {
       window.sessionStorage.setItem(key, JSON.stringify(value))
@@ -51,7 +63,7 @@ const useSessionStorage = <T>({
       console.error(error)
     }
   }
-  return [state, setSessionStorage, removeSessionStorage] as const
+  return [state, setSessionStorage, removeSessionStorage, getSessionStorage] as const
 }
 
 export default useSessionStorage
